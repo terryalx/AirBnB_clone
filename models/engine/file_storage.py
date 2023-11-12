@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """File Storage"""
 
+
 import json
 from models.base_model import BaseModel
 
@@ -32,13 +33,19 @@ class FileStorage:
             json_obj[key] = self.__objects[key].to_dict()
         with open(self.__file_path, 'w') as f:
             json.dump(json_obj, f)
-    
+
     def reload(self):
         """Deserialize JSON"""
         try:
             with open(self.__file_path, 'r') as f:
                 obj = json.load(f)
             for key in obj:
-                self.__objects[key] = class_list[obj[key]["__class"]](**obj[key])
-        except:
+                class_name = None
+                if "__class" in obj[key]:
+                    class_name = obj[key]["__class"]
+                if class_name in class_list:
+                    object_data = obj[key]
+                    class_instance = class_list[class_name](**object_data)
+                    self.__objects[key] = class_instance
+        except FileNotFoundError:
             pass

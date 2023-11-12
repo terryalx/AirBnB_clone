@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-"BaseModel"
+
+
+"""BaseModel"""
 
 
 from uuid import uuid4
