@@ -8,18 +8,28 @@ from datetime import datetime
 
 class BaseModel:
     """super class"""
-    def __init__(self):
-        self.id = str(uuid4())
-        self.created_at = datetime.now()
-        self.updated_at = self.created_at
+    def __init__(self, *args, **kwargs):
+        """Initialization"""
+        if len(kwargs) != 0:
+            for key, value in kwargs.items():
+                if key == "__class__":
+                    continue
+                elif key == "created_at" or key == "updated_at":
+                    setattr(self, key, datetime.fromisoformat(value))
+                else:
+                    setattr(self, key, value)
+        else:
+            self.id = str(uuid4())
+            self.created_at = datetime.now()
+            self.updated_at = self.created_at
 
     def __str__(self):
         """Format"""
         return "[{:s}] ({:s}) {}".format(self.__class__.__name__, self.id, 
-                                        self.__dict__)
+                self.__dict__)
 
-    def save(self):
-        """set time"""
+        def save(self):
+            """set time"""
         self.updated_at = datetime.now()
 
     def to_dict(self):

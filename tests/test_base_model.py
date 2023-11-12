@@ -26,18 +26,19 @@ class Test_BaseModel(unittest.TestCase):
         self.assertEqual(base_model.id, base_model.id)
         self.assertEqual(type(base_model.created_at), datetime)
         self.assertEqual(type(base_model.updated_at), datetime)
-        """
+
+        
         data = {
-                'id': base_model.id,
+                'id': '2468',
                 'created_at': '2023-01-01T00:00:00',
                 'updated_at': '2023-01-01T00:00:00',
                 'name': 'User'
                 }
+
         base_model = BaseModel(**data)
 
-        self.assertEqual(base_model.id, data['id'])
-        self.assertEqual(base_model.name, data['User'])
-        """
+        self.assertEqual(base_model.id, '2468')
+        self.assertEqual(base_model.name, 'User')
 
 if __name__ == "__main__":
     unittest.main()
