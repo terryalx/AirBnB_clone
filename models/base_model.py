@@ -4,7 +4,7 @@
 
 from uuid import uuid4
 from datetime import datetime
-
+import models
 
 class BaseModel:
     """super class"""
@@ -22,15 +22,18 @@ class BaseModel:
             self.id = str(uuid4())
             self.created_at = datetime.now()
             self.updated_at = self.created_at
+            models.storage.new(self)
+            models.storage.save()
 
     def __str__(self):
         """Format"""
         return "[{:s}] ({:s}) {}".format(self.__class__.__name__, self.id, 
                 self.__dict__)
 
-        def save(self):
-            """set time"""
+    def save(self):
+        """set time"""
         self.updated_at = datetime.now()
+        models.storage.save()
 
     def to_dict(self):
         """return __dict__"""

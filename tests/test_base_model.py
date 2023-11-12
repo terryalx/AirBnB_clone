@@ -40,5 +40,10 @@ class Test_BaseModel(unittest.TestCase):
         self.assertEqual(base_model.id, '2468')
         self.assertEqual(base_model.name, 'User')
 
+    def test_init_args(self):
+        """Test args"""
+        name = BaseModel(None)
+        self.assertNotIn(None, name.__dict__.values())
+
 if __name__ == "__main__":
     unittest.main()
