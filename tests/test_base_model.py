@@ -7,6 +7,7 @@ import models
 from models.base_model import BaseModel
 from datetime import datetime
 
+
 class Test_BaseModel(unittest.TestCase):
     """BaseModel Test"""
 
@@ -27,7 +28,6 @@ class Test_BaseModel(unittest.TestCase):
         self.assertEqual(type(base_model.created_at), datetime)
         self.assertEqual(type(base_model.updated_at), datetime)
 
-        
         data = {
                 'id': '2468',
                 'created_at': '2023-01-01T00:00:00',
@@ -44,6 +44,7 @@ class Test_BaseModel(unittest.TestCase):
         """Test args"""
         name = BaseModel(None)
         self.assertNotIn(None, name.__dict__.values())
+
 
 if __name__ == "__main__":
     unittest.main()
