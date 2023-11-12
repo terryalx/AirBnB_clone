@@ -6,6 +6,7 @@ from uuid import uuid4
 from datetime import datetime
 import models
 
+
 class BaseModel:
     """super class"""
     def __init__(self, *args, **kwargs):
@@ -27,7 +28,7 @@ class BaseModel:
 
     def __str__(self):
         """Format"""
-        return "[{:s}] ({:s}) {}".format(self.__class__.__name__, self.id, 
+        return "[{:s}] ({:s}) {}".format(self.__class__.__name__, self.id,
                 self.__dict__)
 
     def save(self):
