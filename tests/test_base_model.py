@@ -24,6 +24,8 @@ class Test_BaseModel(unittest.TestCase):
         base_model = self.base_model
 
         self.assertEqual(base_model.id, base_model.id)
+        self.assertEqual(type(base_model.created_at), datetime)
+        self.assertEqual(type(base_model.updated_at), datetime)
         """
         data = {
                 'id': base_model.id,
