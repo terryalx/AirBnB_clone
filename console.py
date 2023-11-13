@@ -93,18 +93,7 @@ class HBNBCommand(cmd.Cmd):
             storage.save()
         else:
             print("** no instance found **")
-    """
-    def do_all(self, arg):
-        Prints all instances
-        if not arg:
-            print([str(v) for k, v in models.storage.all().items()])
-        else:
-            if not self.class_list.get(arg):
-                print("** class doesn't exist **")
-                return False
-            print([str(v) for k, v in models.storage.all().items()
-                  if type(v) is self.class_list.get(arg)])
-    """
+
     def do_all(self, arg):
         """ Prints all """
         storage.reload()
@@ -160,6 +149,15 @@ class HBNBCommand(cmd.Cmd):
                 setattr(obj, attrname, attrval)
                 obj.updated_at = updatetime
                 models.storage.save()
+
+    def do_count(self, arg):
+        """ Print  number of instances """
+        counter = 0
+        objects_dict = storage.all()
+        for key, value in objects_dict.items():
+            if (arg in key):
+                counter += 1
+        print(counter)
 
 
 if __name__ == "__main__":
