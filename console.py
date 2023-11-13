@@ -93,9 +93,9 @@ class HBNBCommand(cmd.Cmd):
             storage.save()
         else:
             print("** no instance found **")
-
+    """
     def do_all(self, arg):
-        """Prints all instances"""
+        Prints all instances
         if not arg:
             print([str(v) for k, v in models.storage.all().items()])
         else:
@@ -104,6 +104,25 @@ class HBNBCommand(cmd.Cmd):
                 return False
             print([str(v) for k, v in models.storage.all().items()
                   if type(v) is self.class_list.get(arg)])
+    """
+    def do_all(self, arg):
+        """ Prints all """
+        storage.reload()
+        objects_dict = storage.all()
+        my_json = []
+        if not arg:
+            for obj in objects_dict.values():
+                my_json.append(str(obj))
+            print(json.dumps(my_json))
+            return
+        token = shlex.split(arg)
+        if token[0] in HBNBCommand.class_list.keys():
+            for key, obj in objects_dict.items():
+                if token[0] in key:
+                    my_json.append(str(obj))
+            print(json.dumps(my_json))
+        else:
+            print("** class doesn't exist **")
 
     def do_update(self, arg):
         """Updates an instance"""
