@@ -18,7 +18,7 @@ from models.review import Review
 
 class HBNBCommand(cmd.Cmd):
     """HBnB console"""
-    promt = '(hbnb)'
+    promt = '(hbnb) '
     class_list = {
             "BaseModel": BaseModel,
             "User": User,
